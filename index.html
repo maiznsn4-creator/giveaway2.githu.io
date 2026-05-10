@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhmerLife | Fast Loading</title>
+    <title>KhmerLife Dashboard</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Moul&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,105 +14,127 @@
             --bg: #e0e5ec;
             --text: #31344b;
             --blue: #0088cc;
+            --green: #2ecc71;
+            --red: #e74c3c;
             --shadow-light: 6px 6px 12px #a3b1c6;
             --shadow-white: -6px -6px 12px #ffffff;
             --shadow-inset: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kantumruy Pro', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; padding: 20px; overflow-x: hidden; }
-        .container { width: 100%; max-width: 420px; }
+        body { background-color: var(--bg); color: var(--text); padding: 15px; }
 
         .card {
-            background: var(--bg); border-radius: 35px; padding: 30px 20px;
+            background: var(--bg); border-radius: 30px; padding: 20px;
             box-shadow: var(--shadow-light), var(--shadow-white);
-            margin-bottom: 30px; text-align: center;
+            margin-bottom: 20px; text-align: center;
         }
 
-        .icon-circle {
-            width: 80px; height: 80px; margin: 0 auto 20px;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--bg); border-radius: 50%;
-            box-shadow: var(--shadow-light), var(--shadow-white);
-            font-size: 35px; color: var(--blue);
-        }
+        .profile-section { display: flex; align-items: center; gap: 15px; text-align: left; padding: 10px; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; box-shadow: var(--shadow-light), var(--shadow-white); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--blue); }
 
-        h2 { font-family: 'Moul', serif; font-size: 17px; color: var(--blue); margin-bottom: 15px; }
-        .balance-val { font-size: 45px; font-weight: 800; margin: 10px 0; }
+        h2 { font-family: 'Moul', serif; font-size: 14px; color: var(--blue); margin-bottom: 15px; }
+        .balance-val { font-size: 40px; font-weight: 800; color: var(--text); margin: 5px 0; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .stat-item { padding: 15px; border-radius: 20px; box-shadow: var(--shadow-inset); font-size: 11px; }
+        .stat-num { font-size: 18px; font-weight: bold; color: var(--blue); }
 
         .neu-btn {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 20px; background: var(--bg);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 16px; background: var(--bg);
             box-shadow: var(--shadow-light), var(--shadow-white);
-            border-radius: 18px; border: none; cursor: pointer;
-            width: 100%; color: var(--text); font-weight: 700; margin-bottom: 15px;
-            transition: 0.2s; text-decoration: none;
+            border-radius: 15px; border: none; cursor: pointer;
+            width: 100%; color: var(--text); font-weight: 700; margin-top: 15px;
+            transition: 0.2s;
         }
-        .neu-btn:active { box-shadow: var(--shadow-inset); transform: scale(0.97); }
-        
-        .link-display {
-            background: var(--bg); box-shadow: var(--shadow-inset);
-            padding: 15px; border-radius: 15px; font-size: 11px;
-            word-break: break-all; margin: 20px 0; text-align: left;
-        }
+        .neu-btn:active { box-shadow: var(--shadow-inset); transform: scale(0.98); }
+        .neu-btn.disabled { opacity: 0.4; cursor: not-allowed; }
+        .neu-btn.active { color: var(--green); }
+
+        .ref-box { background: var(--bg); box-shadow: var(--shadow-inset); padding: 12px; border-radius: 12px; font-size: 11px; word-break: break-all; margin: 15px 0; color: #666; }
+
+        /* Hidden Input */
+        #qr-input { display: none; }
 
         #dashboard-ui, #verify-ui { display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="verify-ui">
-        <div class="card">
-            <div class="icon-circle"><i class="fas fa-lock"></i></div>
-            <h2>ផ្ទៀងផ្ទាត់ការចូលរួម</h2>
-            <p style="font-size: 13px; margin-bottom: 20px;">សូម Join Channel ទាំង ២ ដើម្បីចាប់ផ្ដើម</p>
-            <a href="https://t.me/Select_Store1" target="_blank" class="neu-btn">
-                <span><i class="fab fa-telegram-plane"></i> Select Store 1</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            <a href="https://t.me/Select_Store2" target="_blank" class="neu-btn">
-                <span><i class="fab fa-telegram-plane"></i> Select Store 2</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            <button class="neu-btn" style="color: var(--blue); justify-content: center; margin-top: 10px;" onclick="checkMembership()">
-                ផ្ទៀងផ្ទាត់ឥឡូវនេះ
-            </button>
+<div id="verify-ui">
+    <div class="card">
+        <div style="font-size: 50px; color: var(--blue); margin-bottom: 15px;"><i class="fas fa-shield-alt"></i></div>
+        <h2>ផ្ទៀងផ្ទាត់សមាជិក</h2>
+        <button class="neu-btn" onclick="window.open('https://t.me/Select_Store1')">Join Channel 1</button>
+        <button class="neu-btn" onclick="window.open('https://t.me/Select_Store2')">Join Channel 2</button>
+        <button class="neu-btn" style="color: var(--blue); margin-top: 25px;" onclick="checkMembership()">ផ្ទៀងផ្ទាត់ឥឡូវនេះ</button>
+    </div>
+</div>
+
+<div id="dashboard-ui">
+    <div class="card profile-section">
+        <div class="avatar"><i class="fas fa-user"></i></div>
+        <div>
+            <div id="user-name" style="font-weight: bold; font-size: 14px;">User</div>
+            <div id="user-id" style="font-size: 11px; opacity: 0.6;">ID: 000000</div>
         </div>
     </div>
 
-    <div id="dashboard-ui">
-        <div class="card">
-            <div style="font-size: 12px; opacity: 0.6;">សមតុល្យសរុប</div>
-            <div class="balance-val">$<span id="bal-amount">0.00</span></div>
-            <p style="font-size: 11px;">ដកប្រាក់ចាប់ពី $0.50</p>
-        </div>
-
-        <div class="card">
-            <h2>ណែនាំមិត្តភក្តិ</h2>
-            <div class="link-display" onclick="copyLink()">
-                <span id="link-text">https://t.me/...</span>
+    <div class="card">
+        <div style="font-size: 12px; opacity: 0.6;">ទឹកប្រាក់ដែលអាចដកបាន</div>
+        <div class="balance-val">$<span id="bal-amount">0.00</span></div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num" id="ref-count">0</div>
+                <div>ចំនួនណែនាំ</div>
             </div>
-            <button class="neu-btn" style="color: #2ecc71; justify-content: center;" onclick="shareLink()">
-                <i class="fab fa-telegram"></i> ផ្ញើទៅកាន់មិត្តភក្តិ
-            </button>
+            <div class="stat-item">
+                <div class="stat-num">$0.50</div>
+                <div>អប្បបរមាដក</div>
+            </div>
         </div>
     </div>
+
+    <div class="card">
+        <h2>ណែនាំមិត្តភក្តិ</h2>
+        <div class="ref-box" onclick="copyLink()">
+            <i class="far fa-copy"></i> <span id="link-text">...</span>
+        </div>
+        <button class="neu-btn active" onclick="shareLink()">
+            <i class="fab fa-telegram"></i> ផ្ញើទៅកាន់មិត្តភក្តិ
+        </button>
+    </div>
+
+    <button class="neu-btn disabled" id="wd-btn">
+        <i class="fas fa-file-invoice-dollar"></i> ដកប្រាក់ឥឡូវនេះ
+    </button>
+    <input type="file" id="qr-input" accept="image/*">
 </div>
 
 <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    const BOT_TOKEN = "7718769824:AAHRxjM43ZHD4ZkGq8lIh7C5A5FhxvOnJs0";
+    const BOT_TOKEN = "8212122943:AAFOREIno5CXRklS_X9Kiwz6iAput2zExtI";
     const CHANNELS = ["-1002259615654", "-1001844015273"];
     const ADMIN_GROUP = "-1003849367168";
-    const inviterId = tg.initDataUnsafe.start_param;
+    
+    let currentBalance = 0.00;
+    let currentRefs = 0;
 
     window.onload = () => {
-        // ឆែកក្នុង CloudStorage របស់ Telegram (លឿន និងមិនចាំបាច់មាន Server)
-        tg.CloudStorage.getItem('is_verified', (err, value) => {
-            if (value === 'yes') {
+        const user = tg.initDataUnsafe.user;
+        if (user) {
+            document.getElementById('user-name').innerText = user.first_name;
+            document.getElementById('user-id').innerText = "ID: " + user.id;
+        }
+
+        // ទាញទិន្នន័យតុល្យភាពពី CloudStorage (បើមាន)
+        tg.CloudStorage.getItems(['is_verified', 'balance', 'refs'], (err, values) => {
+            if (values.is_verified === 'yes') {
+                currentBalance = parseFloat(values.balance || 0);
+                currentRefs = parseInt(values.refs || 0);
                 showDashboard();
             } else {
                 document.getElementById('verify-ui').style.display = 'block';
@@ -121,42 +143,88 @@
     };
 
     async function checkMembership() {
-        const userId = tg.initDataUnsafe.user.id;
+        const user = tg.initDataUnsafe.user;
         Swal.fire({ title: 'កំពុងពិនិត្យ...', background: '#e0e5ec', didOpen: () => Swal.showLoading() });
 
-        let isAllJoined = true;
+        let ok = true;
         for (const cid of CHANNELS) {
             try {
-                const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChatMember?chat_id=${cid}&user_id=${userId}`);
+                const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChatMember?chat_id=${cid}&user_id=${user.id}`);
                 const d = await r.json();
-                if (!d.ok || !['member', 'administrator', 'creator'].includes(d.result.status)) {
-                    isAllJoined = false; break;
-                }
-            } catch (e) { isAllJoined = false; }
+                if (!d.ok || !['member', 'administrator', 'creator'].includes(d.result.status)) { ok = false; break; }
+            } catch (e) { ok = false; }
         }
 
-        if (isAllJoined) {
-            tg.CloudStorage.setItem('is_verified', 'yes');
-            if (inviterId) {
-                const msg = `🎊 ណែនាំថ្មី!\nអ្នកថ្មី: ${tg.initDataUnsafe.user.first_name}\nអ្នកណែនាំ: ${inviterId}`;
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_GROUP}&text=${encodeURIComponent(msg)}`);
+        if (ok) {
+            // បើកថ្មី ឱ្យលុយសាកល្បង $0.10 បើមានអ្នកណែនាំ
+            let newBal = 0.00;
+            const inviter = tg.initDataUnsafe.start_param;
+            if (inviter && inviter !== String(user.id)) {
+                // ផ្ញើសារប្រាប់ Admin ឱ្យបូកលុយឱ្យអ្នកណែនាំ
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_GROUP}&text=${encodeURIComponent("💰 អ្នកណែនាំ ID: " + inviter + " ទទួលបាន $0.05 ពីការណែនាំ " + user.first_name)}`);
             }
-            Swal.fire('ជោគជ័យ!', 'ស្វាគមន៍មកកាន់ Dashboard', 'success').then(() => location.reload());
+
+            tg.CloudStorage.setItem('is_verified', 'yes');
+            tg.CloudStorage.setItem('balance', newBal.toString());
+            tg.CloudStorage.setItem('refs', '0');
+            location.reload();
         } else {
             Swal.close();
-            Swal.fire('មិនទាន់ជាប់!', 'សូម Join Channel ទាំង ២ សិន!', 'error');
+            Swal.fire('មិនទាន់ជាប់', 'សូម Join Channel ឱ្យគ្រប់សិន!', 'error');
         }
     }
 
     function showDashboard() {
         document.getElementById('verify-ui').style.display = 'none';
         document.getElementById('dashboard-ui').style.display = 'block';
-        document.getElementById('link-text').innerText = `https://t.me/Free19_tool_bot/Giveaway?startapp=${tg.initDataUnsafe.user.id}`;
+        document.getElementById('bal-amount').innerText = currentBalance.toFixed(2);
+        document.getElementById('ref-count').innerText = currentRefs;
+        document.getElementById('link-text').innerText = `https://t.me/Free19_tool_bot/App?startapp=${tg.initDataUnsafe.user.id}`;
+        
+        const btn = document.getElementById('wd-btn');
+        if (currentBalance >= 0.50) {
+            btn.classList.remove('disabled');
+            btn.onclick = () => document.getElementById('qr-input').click();
+        }
     }
 
+    // មុខងារដកលុយ និងផ្ញើរូបភាព
+    document.getElementById('qr-input').onchange = async function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        Swal.fire({ title: 'កំពុងផ្ញើសំណើ...', background: '#e0e5ec', didOpen: () => Swal.showLoading() });
+
+        const formData = new FormData();
+        formData.append('chat_id', ADMIN_GROUP);
+        formData.append('photo', file);
+        formData.append('caption', `🔔 សំណើដកប្រាក់!\n👤 ឈ្មោះ: ${tg.initDataUnsafe.user.first_name}\n🆔 ID: ${tg.initDataUnsafe.user.id}\n💰 ចំនួនដក: $${currentBalance.toFixed(2)}\n⚠️ ស្ថានភាព: រង់ចាំការពិនិត្យ`);
+
+        try {
+            const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (res.ok) {
+                // កាត់លុយចេញពី Account
+                currentBalance = 0;
+                tg.CloudStorage.setItem('balance', '0');
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'ផ្ញើជោគជ័យ',
+                    text: 'សំណើដកប្រាក់របស់អ្នកត្រូវបានផ្ញើទៅ Admin ហើយ។ លុយក្នុងអាខោនត្រូវបានកាត់ចេញ។',
+                    background: '#e0e5ec'
+                }).then(() => location.reload());
+            }
+        } catch (err) {
+            Swal.fire('Error', 'មិនអាចផ្ញើរូបភាពបានទេ!', 'error');
+        }
+    };
+
     function copyLink() {
-        const link = document.getElementById('link-text').innerText;
-        navigator.clipboard.writeText(link);
+        navigator.clipboard.writeText(document.getElementById('link-text').innerText);
         tg.showAlert("ចម្លងរួចរាល់!");
     }
 
