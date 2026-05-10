@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhmerLife Dashboard</title>
+    <title>Select Store | Dashboard</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Moul&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,6 @@
             --text: #31344b;
             --blue: #0088cc;
             --green: #2ecc71;
-            --red: #e74c3c;
             --shadow-light: 6px 6px 12px #a3b1c6;
             --shadow-white: -6px -6px 12px #ffffff;
             --shadow-inset: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
@@ -52,20 +51,19 @@
         .neu-btn.disabled { opacity: 0.4; cursor: not-allowed; }
         .neu-btn.active { color: var(--green); }
 
-        .ref-box { background: var(--bg); box-shadow: var(--shadow-inset); padding: 12px; border-radius: 12px; font-size: 11px; word-break: break-all; margin: 15px 0; color: #666; }
+        .ref-box { background: var(--bg); box-shadow: var(--shadow-inset); padding: 12px; border-radius: 12px; font-size: 11px; word-break: break-all; margin: 15px 0; color: #666; cursor: pointer; }
 
-        /* Hidden Input */
         #qr-input { display: none; }
-
         #dashboard-ui, #verify-ui { display: none; }
     </style>
 </head>
 <body>
 
 <div id="verify-ui">
-    <div class="card">
+    <div class="card" style="margin-top: 50px;">
         <div style="font-size: 50px; color: var(--blue); margin-bottom: 15px;"><i class="fas fa-shield-alt"></i></div>
-        <h2>ផ្ទៀងផ្ទាត់សមាជិក</h2>
+        <h2 style="color: var(--text);">SELECT STORE</h2>
+        <p style="font-size: 13px; opacity: 0.8; margin-bottom: 20px;">សូម Join Channel ទាំង ២ ដើម្បីចាប់ផ្តើម</p>
         <button class="neu-btn" onclick="window.open('https://t.me/Select_Store1')">Join Channel 1</button>
         <button class="neu-btn" onclick="window.open('https://t.me/Select_Store2')">Join Channel 2</button>
         <button class="neu-btn" style="color: var(--blue); margin-top: 25px;" onclick="checkMembership()">ផ្ទៀងផ្ទាត់ឥឡូវនេះ</button>
@@ -74,15 +72,15 @@
 
 <div id="dashboard-ui">
     <div class="card profile-section">
-        <div class="avatar"><i class="fas fa-user"></i></div>
+        <div class="avatar"><i class="fas fa-store"></i></div>
         <div>
-            <div id="user-name" style="font-weight: bold; font-size: 14px;">User</div>
+            <div id="user-name" style="font-weight: bold; font-size: 14px;">Select User</div>
             <div id="user-id" style="font-size: 11px; opacity: 0.6;">ID: 000000</div>
         </div>
     </div>
 
     <div class="card">
-        <div style="font-size: 12px; opacity: 0.6;">ទឹកប្រាក់ដែលអាចដកបាន</div>
+        <div style="font-size: 12px; opacity: 0.6;">ទឹកប្រាក់ក្នុងកាបូប</div>
         <div class="balance-val">$<span id="bal-amount">0.00</span></div>
         <div class="stats-grid">
             <div class="stat-item">
@@ -98,6 +96,7 @@
 
     <div class="card">
         <h2>ណែនាំមិត្តភក្តិ</h2>
+        <p style="font-size: 11px; opacity: 0.7;">ណែនាំមិត្តម្នាក់ទទួលបាន $0.05</p>
         <div class="ref-box" onclick="copyLink()">
             <i class="far fa-copy"></i> <span id="link-text">...</span>
         </div>
@@ -107,7 +106,7 @@
     </div>
 
     <button class="neu-btn disabled" id="wd-btn">
-        <i class="fas fa-file-invoice-dollar"></i> ដកប្រាក់ឥឡូវនេះ
+        <i class="fas fa-qrcode"></i> ដកប្រាក់ (ផ្ញើ QR កូដ)
     </button>
     <input type="file" id="qr-input" accept="image/*">
 </div>
@@ -130,7 +129,6 @@
             document.getElementById('user-id').innerText = "ID: " + user.id;
         }
 
-        // ទាញទិន្នន័យតុល្យភាពពី CloudStorage (បើមាន)
         tg.CloudStorage.getItems(['is_verified', 'balance', 'refs'], (err, values) => {
             if (values.is_verified === 'yes') {
                 currentBalance = parseFloat(values.balance || 0);
@@ -156,21 +154,17 @@
         }
 
         if (ok) {
-            // បើកថ្មី ឱ្យលុយសាកល្បង $0.10 បើមានអ្នកណែនាំ
-            let newBal = 0.00;
             const inviter = tg.initDataUnsafe.start_param;
             if (inviter && inviter !== String(user.id)) {
-                // ផ្ញើសារប្រាប់ Admin ឱ្យបូកលុយឱ្យអ្នកណែនាំ
-                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_GROUP}&text=${encodeURIComponent("💰 អ្នកណែនាំ ID: " + inviter + " ទទួលបាន $0.05 ពីការណែនាំ " + user.first_name)}`);
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_GROUP}&text=${encodeURIComponent("🏧 [SELECT STORE] អ្នកណែនាំ ID: " + inviter + " ទទួលបាន $0.05 ពី " + user.first_name)}`);
             }
-
             tg.CloudStorage.setItem('is_verified', 'yes');
-            tg.CloudStorage.setItem('balance', newBal.toString());
+            tg.CloudStorage.setItem('balance', '0.00');
             tg.CloudStorage.setItem('refs', '0');
             location.reload();
         } else {
             Swal.close();
-            Swal.fire('មិនទាន់ជាប់', 'សូម Join Channel ឱ្យគ្រប់សិន!', 'error');
+            Swal.fire('មិនទាន់ជាប់', 'សូម Join Channel ទាំង ២ ឱ្យគ្រប់សិន!', 'error');
         }
     }
 
@@ -184,21 +178,22 @@
         const btn = document.getElementById('wd-btn');
         if (currentBalance >= 0.50) {
             btn.classList.remove('disabled');
+            btn.style.color = "var(--blue)";
             btn.onclick = () => document.getElementById('qr-input').click();
         }
     }
 
-    // មុខងារដកលុយ និងផ្ញើរូបភាព
+    // មុខងារដកលុយ
     document.getElementById('qr-input').onchange = async function(e) {
         const file = e.target.files[0];
         if (!file) return;
 
-        Swal.fire({ title: 'កំពុងផ្ញើសំណើ...', background: '#e0e5ec', didOpen: () => Swal.showLoading() });
+        Swal.fire({ title: 'កំពុងផ្ញើទិន្នន័យ...', background: '#e0e5ec', didOpen: () => Swal.showLoading() });
 
         const formData = new FormData();
         formData.append('chat_id', ADMIN_GROUP);
         formData.append('photo', file);
-        formData.append('caption', `🔔 សំណើដកប្រាក់!\n👤 ឈ្មោះ: ${tg.initDataUnsafe.user.first_name}\n🆔 ID: ${tg.initDataUnsafe.user.id}\n💰 ចំនួនដក: $${currentBalance.toFixed(2)}\n⚠️ ស្ថានភាព: រង់ចាំការពិនិត្យ`);
+        formData.append('caption', `🏧 សំណើដកប្រាក់ [SELECT STORE]\n👤 ឈ្មោះ: ${tg.initDataUnsafe.user.first_name}\n🆔 ID: ${tg.initDataUnsafe.user.id}\n💰 ចំនួនដក: $${currentBalance.toFixed(2)}\n📥 សូមពិនិត្យ និងផ្ទេរប្រាក់!`);
 
         try {
             const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
@@ -207,19 +202,17 @@
             });
 
             if (res.ok) {
-                // កាត់លុយចេញពី Account
                 currentBalance = 0;
                 tg.CloudStorage.setItem('balance', '0');
-                
                 Swal.fire({
                     icon: 'success',
                     title: 'ផ្ញើជោគជ័យ',
-                    text: 'សំណើដកប្រាក់របស់អ្នកត្រូវបានផ្ញើទៅ Admin ហើយ។ លុយក្នុងអាខោនត្រូវបានកាត់ចេញ។',
+                    text: 'សំណើដកប្រាក់ត្រូវបានផ្ញើទៅ Admin។ លុយរបស់អ្នកត្រូវបានកាត់ចេញ។',
                     background: '#e0e5ec'
                 }).then(() => location.reload());
             }
         } catch (err) {
-            Swal.fire('Error', 'មិនអាចផ្ញើរូបភាពបានទេ!', 'error');
+            Swal.fire('Error', 'មានបញ្ហាបច្ចេកទេស!', 'error');
         }
     };
 
@@ -230,7 +223,8 @@
 
     function shareLink() {
         const link = document.getElementById('link-text').innerText;
-        window.open(`https://t.me/share/url?url=${link}&text=${encodeURIComponent("តោះ! រកលុយជាមួយ KhmerLife 💸")}`);
+        const msg = encodeURIComponent("តោះ! រកលុយជាមួយ Select Store 💸\nចូលតាម Link នេះ៖\n");
+        window.open(`https://t.me/share/url?url=${link}&text=${msg}`);
     }
 </script>
 </body>
