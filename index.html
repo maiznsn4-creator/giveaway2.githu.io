@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhmerLife | Refer & Earn Neumorphism</title>
+    <title>KhmerLife | Fast Loading</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Moul&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,83 +14,46 @@
             --bg: #e0e5ec;
             --text: #31344b;
             --blue: #0088cc;
-            --green: #2ecc71;
             --shadow-light: 6px 6px 12px #a3b1c6;
             --shadow-white: -6px -6px 12px #ffffff;
             --shadow-inset: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kantumruy Pro', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; padding: 20px; }
+        body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; justify-content: center; padding: 20px; overflow-x: hidden; }
         .container { width: 100%; max-width: 420px; }
 
-        /* Neumorphic Card Base */
         .card {
-            background: var(--bg);
-            border-radius: 35px;
-            padding: 30px 20px;
+            background: var(--bg); border-radius: 35px; padding: 30px 20px;
             box-shadow: var(--shadow-light), var(--shadow-white);
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 30px; text-align: center;
         }
 
-        /* Animated Icon Box */
         .icon-circle {
-            width: 90px; height: 90px;
-            margin: 0 auto 20px;
+            width: 80px; height: 80px; margin: 0 auto 20px;
             display: flex; align-items: center; justify-content: center;
-            background: var(--bg);
-            border-radius: 50%;
+            background: var(--bg); border-radius: 50%;
             box-shadow: var(--shadow-light), var(--shadow-white);
-            font-size: 40px; color: var(--blue);
-            animation: floating 3s ease-in-out infinite;
+            font-size: 35px; color: var(--blue);
         }
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        h2 { font-family: 'Moul', serif; font-size: 17px; color: var(--blue); margin-bottom: 15px; }
+        .balance-val { font-size: 45px; font-weight: 800; margin: 10px 0; }
 
-        h2 { font-family: 'Moul', serif; font-size: 17px; color: var(--blue); margin-bottom: 15px; letter-spacing: 0.5px; }
-        p { font-size: 13px; opacity: 0.7; line-height: 1.6; margin-bottom: 20px; }
-
-        /* Neumorphic Buttons */
-        .btn-group { display: flex; flex-direction: column; gap: 18px; }
-        
         .neu-btn {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 20px;
-            background: var(--bg);
+            padding: 16px 20px; background: var(--bg);
             box-shadow: var(--shadow-light), var(--shadow-white);
-            border-radius: 18px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.2s ease;
+            border-radius: 18px; border: none; cursor: pointer;
+            width: 100%; color: var(--text); font-weight: 700; margin-bottom: 15px;
+            transition: 0.2s; text-decoration: none;
         }
-
         .neu-btn:active { box-shadow: var(--shadow-inset); transform: scale(0.97); }
-        .neu-btn i { font-size: 18px; color: var(--blue); }
-        
-        .btn-main {
-            width: 100%; justify-content: center; margin-top: 10px;
-            background: var(--bg); color: var(--blue);
-        }
-
-        /* Dashboard Styles */
-        .balance-box { padding: 40px 20px; }
-        .balance-val { font-size: 48px; font-weight: 800; color: var(--text); margin-top: 5px; }
         
         .link-display {
-            background: var(--bg);
-            box-shadow: var(--shadow-inset);
-            padding: 15px; border-radius: 15px;
-            font-size: 11px; color: #666;
-            word-break: break-all; margin: 20px 0;
-            text-align: left;
+            background: var(--bg); box-shadow: var(--shadow-inset);
+            padding: 15px; border-radius: 15px; font-size: 11px;
+            word-break: break-all; margin: 20px 0; text-align: left;
         }
 
         #dashboard-ui, #verify-ui { display: none; }
@@ -99,91 +62,62 @@
 <body>
 
 <div class="container">
-    
     <div id="verify-ui">
         <div class="card">
             <div class="icon-circle"><i class="fas fa-lock"></i></div>
             <h2>ផ្ទៀងផ្ទាត់ការចូលរួម</h2>
-            <p>ដើម្បីសុវត្ថិភាព និងអាចរកប្រាក់បាន សូមចុច Join Channel ទាំង ២ ជាមុនសិន។</p>
-            
-            <div class="btn-group">
-                <a href="https://t.me/Select_Store1" target="_blank" class="neu-btn">
-                    <span><i class="fab fa-telegram-plane"></i> Select Store 1</span>
-                    <i class="fas fa-external-link-alt"></i>
-                </a>
-                <a href="https://t.me/Select_Store2" target="_blank" class="neu-btn">
-                    <span><i class="fab fa-telegram-plane"></i> Select Store 2</span>
-                    <i class="fas fa-external-link-alt"></i>
-                </a>
-                <button class="neu-btn btn-main" onclick="checkMembership()">
-                    <i class="fas fa-check-circle"></i> ផ្ទៀងផ្ទាត់ឥឡូវនេះ
-                </button>
-            </div>
+            <p style="font-size: 13px; margin-bottom: 20px;">សូម Join Channel ទាំង ២ ដើម្បីចាប់ផ្ដើម</p>
+            <a href="https://t.me/Select_Store1" target="_blank" class="neu-btn">
+                <span><i class="fab fa-telegram-plane"></i> Select Store 1</span>
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+            <a href="https://t.me/Select_Store2" target="_blank" class="neu-btn">
+                <span><i class="fab fa-telegram-plane"></i> Select Store 2</span>
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+            <button class="neu-btn" style="color: var(--blue); justify-content: center; margin-top: 10px;" onclick="checkMembership()">
+                ផ្ទៀងផ្ទាត់ឥឡូវនេះ
+            </button>
         </div>
     </div>
 
     <div id="dashboard-ui">
-        <div class="card balance-box">
-            <div style="font-size: 12px; opacity: 0.6; text-transform: uppercase; font-weight: bold;">សមតុល្យសរុប</div>
+        <div class="card">
+            <div style="font-size: 12px; opacity: 0.6;">សមតុល្យសរុប</div>
             <div class="balance-val">$<span id="bal-amount">0.00</span></div>
-            <p style="margin-top: 10px; font-size: 11px;">ដកប្រាក់ចាប់ពី $0.50 ឡើងទៅ</p>
+            <p style="font-size: 11px;">ដកប្រាក់ចាប់ពី $0.50</p>
         </div>
 
         <div class="card">
             <h2>ណែនាំមិត្តភក្តិ</h2>
-            <p>មិត្តភក្តិម្នាក់ទទួលបាន <b>$0.05</b> (មិត្តត្រូវ Verify ជាប់)</p>
-            
             <div class="link-display" onclick="copyLink()">
-                <i class="far fa-copy" style="margin-right: 8px;"></i>
-                <span id="link-text">https://t.me/bot...</span>
+                <span id="link-text">https://t.me/...</span>
             </div>
-
-            <button class="neu-btn btn-main" style="color: var(--green);" onclick="shareLink()">
+            <button class="neu-btn" style="color: #2ecc71; justify-content: center;" onclick="shareLink()">
                 <i class="fab fa-telegram"></i> ផ្ញើទៅកាន់មិត្តភក្តិ
             </button>
         </div>
-
-        <button class="neu-btn" style="width: 100%; justify-content: center; opacity: 0.5;" id="wd-btn">
-            <i class="fas fa-wallet"></i> ដកប្រាក់ទៅ ABA / Wing
-        </button>
     </div>
-
 </div>
 
 <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    // ជំនួសជាមួយ Link របស់ Render Backend របស់អ្នក
-    const API_BASE = "https://your-node-app.render.com/api"; 
     const BOT_TOKEN = "7718769824:AAHRxjM43ZHD4ZkGq8lIh7C5A5FhxvOnJs0";
     const CHANNELS = ["-1002259615654", "-1001844015273"];
+    const ADMIN_GROUP = "-1003849367168";
     const inviterId = tg.initDataUnsafe.start_param;
 
-    window.onload = async () => {
-        const user = tg.initDataUnsafe.user;
-        if (!user) {
-            document.body.innerHTML = "<h3>សូមបើកក្នុង Telegram</h3>";
-            return;
-        }
-
-        try {
-            const res = await fetch(`${API_BASE}/user`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ id: user.id, name: user.first_name })
-            });
-            const data = await res.json();
-            
-            if (data.hasVerified) {
-                showDashboard(data);
+    window.onload = () => {
+        // ឆែកក្នុង CloudStorage របស់ Telegram (លឿន និងមិនចាំបាច់មាន Server)
+        tg.CloudStorage.getItem('is_verified', (err, value) => {
+            if (value === 'yes') {
+                showDashboard();
             } else {
                 document.getElementById('verify-ui').style.display = 'block';
             }
-        } catch (e) {
-            // បើ Server មិនទាន់ដើរ បង្ហាញ Verify UI សិន
-            document.getElementById('verify-ui').style.display = 'block';
-        }
+        });
     };
 
     async function checkMembership() {
@@ -192,37 +126,32 @@
 
         let isAllJoined = true;
         for (const cid of CHANNELS) {
-            const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChatMember?chat_id=${cid}&user_id=${userId}`);
-            const d = await r.json();
-            if (!d.ok || !['member', 'administrator', 'creator'].includes(d.result.status)) {
-                isAllJoined = false; break;
-            }
+            try {
+                const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChatMember?chat_id=${cid}&user_id=${userId}`);
+                const d = await r.json();
+                if (!d.ok || !['member', 'administrator', 'creator'].includes(d.result.status)) {
+                    isAllJoined = false; break;
+                }
+            } catch (e) { isAllJoined = false; }
         }
 
         if (isAllJoined) {
-            const vRes = await fetch(`${API_BASE}/verify`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ userId: userId, inviterId: inviterId })
-            });
-            const vData = await vRes.json();
-            location.reload();
+            tg.CloudStorage.setItem('is_verified', 'yes');
+            if (inviterId) {
+                const msg = `🎊 ណែនាំថ្មី!\nអ្នកថ្មី: ${tg.initDataUnsafe.user.first_name}\nអ្នកណែនាំ: ${inviterId}`;
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_GROUP}&text=${encodeURIComponent(msg)}`);
+            }
+            Swal.fire('ជោគជ័យ!', 'ស្វាគមន៍មកកាន់ Dashboard', 'success').then(() => location.reload());
         } else {
-            Swal.fire('មិនទាន់ជាប់!', 'សូម Join Channel ទាំង ២ ជាមុនសិន!', 'error');
+            Swal.close();
+            Swal.fire('មិនទាន់ជាប់!', 'សូម Join Channel ទាំង ២ សិន!', 'error');
         }
     }
 
-    function showDashboard(user) {
+    function showDashboard() {
         document.getElementById('verify-ui').style.display = 'none';
         document.getElementById('dashboard-ui').style.display = 'block';
-        document.getElementById('bal-amount').innerText = user.balance.toFixed(2);
-        document.getElementById('link-text').innerText = `https://t.me/Free19_tool_bot/Giveaway?startapp=${user.id}`;
-        
-        if (user.balance >= 0.5) {
-            const b = document.getElementById('wd-btn');
-            b.style.opacity = "1";
-            b.onclick = () => Swal.fire(' ABA / Wing', 'សូមផ្ញើលេខកុងទៅ Admin', 'info');
-        }
+        document.getElementById('link-text').innerText = `https://t.me/Free19_tool_bot/Giveaway?startapp=${tg.initDataUnsafe.user.id}`;
     }
 
     function copyLink() {
@@ -233,9 +162,9 @@
 
     function shareLink() {
         const link = document.getElementById('link-text').innerText;
-        window.open(`https://t.me/share/url?url=${link}&text=${encodeURIComponent("តោះ! បងប្អូន ណែនាំមិត្តម្នាក់បាន $0.05 💸")}`);
+        window.open(`https://t.me/share/url?url=${link}&text=${encodeURIComponent("តោះ! រកលុយជាមួយ KhmerLife 💸")}`);
     }
 </script>
 </body>
-                                       </html>
+</html>
 
